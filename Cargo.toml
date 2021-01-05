@@ -1,0 +1,21 @@
+[package]
+name = "gluon-test"
+version = "0.1.0"
+authors = ["crides <zhuhaoqing@live.cn>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+gluon = { git = "https://github.com/gluon-lang/gluon", features = ["serialization"], default-features = false }
+gluon_codegen = { git = "https://github.com/gluon-lang/gluon" } #"0.17.2"
+gluon_completion = { git = "https://github.com/gluon-lang/gluon" } #"0.17.2"
+futures = "0.3.5"
+tokio = { version = "0.2", features = ["rt-threaded", "rt-core", "macros", "signal"] }
+codespan = "0.9.5"
+codespan-reporting = "0.9.5"
+ansi_term = "0.12.1"
+rustyline = "6.3.0"
+serde_derive = "1.0.116"
+serde = "1.0.116"
+app_dirs = "1.2.1"
