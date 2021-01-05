@@ -18,10 +18,8 @@ async fn main() {
     vm.run_io(true);
     add_extern_module(&vm, "test", load);
     let res = vm.run_expr::<()>("test", r#"
-    let { E1, S, E2 } = import! test
-    let e2 = Num 3
-    let s = { e = e2 }
-    let e1 = S1 s
+    let { E1, E2 } = import! test
+    let e1 : E1 = E11 (Num 3)
     ()
     "#);
     // let res = repl::run(&vm, "> ").await;
@@ -32,12 +30,7 @@ async fn main() {
 
 #[derive(Clone, Debug, VmType, Pushable, Getable)]
 enum E1 {
-    S1(S),
-}
-
-#[derive(Clone, Debug, VmType, Pushable, Getable)]
-struct S {
-    e: E2,
+    E11(E2),
 }
 
 #[derive(Clone, Debug, VmType, Pushable, Getable)]
@@ -50,7 +43,6 @@ pub fn load(thread: &Thread) -> Result<ExternModule, gluon::vm::Error> {
         thread,
         record! {
             type E1 => E1,
-            type S => S,
             type E2 => E2,
         },
     )
